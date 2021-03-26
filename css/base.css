@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Averia Serif Libre', cursive;
 }
 
 body,
@@ -8,4 +9,24 @@ html {
     margin: 0;
     padding: 0;
     width: 100%;
+}
+
+h1 {
+    font-size: xx-large;
+    margin: 1%;
+    font-family: 'Averia Serif Libre', cursive;
+}
+
+header {
+    border: black 3px solid;
+    text-align: center;
+    padding: 1%;
+    border-radius: 7px;
+}
+
+footer {
+    border: black 3px solid;
+    border-radius: 7px;
+    text-align: center;
+    padding: 1%;
 }
