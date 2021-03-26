@@ -1,12 +1,16 @@
 'use strict';
 // make constructor function
 //this parameter from json file
+const allObject = [];
+// console.log(allObject);
+
 function ImagesFun(image_url, title, description, keyword, horns) {
     this.image_url = image_url;
     this.title = title;
     this.description = description;
     this.keyword = keyword;
     this.horns = horns;
+    allObject.push(this);
 }
 //take element from html by prototype function 
 ImagesFun.prototype.render = function() {
@@ -18,6 +22,8 @@ ImagesFun.prototype.render = function() {
         templateImg.find('h2').text(this.title);
         templateImg.find('p').text(this.description);
         templateImg.find('img').attr('src', this.image_url);
+        templateImg.attr('class', this.keyword);
+        templateImg.removeAttr('id');
     }
     // call function
 ImagesFun.prototype.render();
@@ -64,25 +70,26 @@ $(document).ready(function filterFun() {
 //we didnt call it , why ot still work 
 // filterFun();
 // -----------finsh make options--------------
-const selectOption = $('select').children('option:selected').val();
 //we need get select option
-console.log(selectOption);
+// console.log(selectOption);
+$(document).ready(function() {
+    $('select').on('change', function() {
+        // console.log(selectOption);
+        let selected = $(this).val();
+        console.log(selected);
+        $('main div').hide();
+        if (selected === 'default') {
+            $('main div').show();
 
-
-
-/*$(document).ready(function() {
-
-    const buttonElement = $('button');
-    console.log(buttonElement);
-
-    $('button').on('click', function() {
-        // counter++;
-        // console.log("button is clicked!! counter: ", counter);
-        // use toggleClass function to add/remove a specific class;
-        // console.log(this); <button ..></button>
-        // console.log($(this));
-        $(this).siblings('ul').toggleClass('on');
-        // or I can use this $('ul').toggleClass('on');
-    });
+        } else {
+            allObject.find(element => {
+                if (element.keyword === selected) {
+                    console.log(selected);
+                    // $('main').show();
+                    $('main div.' + selected).show();
+                    //p.ex4 {display: inline-block;}
+                }
+            })
+        }
+    })
 });
-*/
