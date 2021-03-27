@@ -1,5 +1,4 @@
 'use strict';
-// 1. we want to make constructor function depond on json file argument 
 const allObject = [];
 
 function ImagesFun(image_url, title, description, keyword, horns) {
@@ -10,37 +9,36 @@ function ImagesFun(image_url, title, description, keyword, horns) {
     this.horns = horns;
     allObject.push(this);
 }
-//function in (ImagesFun) to render it from html  and give it class = keyword
 ImagesFun.prototype.render = function() {
-    // get tepmlate by id and put it in the variable , by clone(make copy, we need rempve id becouse we have to elemnt with the same id , the origin one and clone one)
-    let templateImg = $('#photo-template').clone();
-    // put it in the correct location
-    $('main').append(templateImg);
-    // find some element on it and give it text from obj and attr 
-    templateImg.find('h2').text(this.title);
-    templateImg.find('p').text(this.description);
-    templateImg.find('img').attr('src', this.image_url);
-    templateImg.attr('class', this.keyword);
-    templateImg.removeAttr('id');
+    let template = $('#mustache-template').html();
+    console.log(template);
+    let html = Mustache.render(template, this);
+    $('main').append(html);
+    return html;
 }
-ImagesFun.prototype.render();
-// ---------------------------------- get data from json file -----------------------------------------------
-//get data from page 1
+
+//get data from json 
 function getImagesData() {
     const ajaxSettings = {
         method: 'get',
         dataType: 'json'
     }
     $.ajax('data/page-1.json', ajaxSettings).then(data => {
-        // console.log(data); 
-        data.forEach(element => {
-            let ImageObject = new ImagesFun(element.image_url, element.title, element.description, element.keyword, element.horns);
-            ImageObject.render();
-        });
-    })
+            // console.log(data); 
+            data.forEach(element => {
+                let ImageObject = new ImagesFun(element.image_url, element.title, element.description, element.keyword, element.horns);
+                ImageObject.render();
+            });
+        })
+        // $.ajax('data/page-2.json', ajaxSettings).then(data => {
+        //     // console.log(data); 
+        //     data.forEach(element => {
+        //         let ImageObject = new ImagesFun(element.image_url, element.title, element.description, element.keyword, element.horns);
+        //         ImageObject.render();
+        //     });
+        // })
 }
-$(document).ready(getImagesData);
-//get data from page 2
+
 function getImagesData2() {
     //copy paste for now 
     const ajaxSettings = {
@@ -58,9 +56,10 @@ function getImagesData2() {
         });
     })
 }
+$(document).ready(getImagesData);
 $(document).ready(getImagesData2);
-
-// -----------------make filter depond on data page  --------------------------->------- 
+ImagesFun.prototype.render();
+/******** all images show  */
 $(document).ready(function filterFun1() {
     //copy paste for now 
     const ajaxSettings = {
@@ -72,6 +71,10 @@ $(document).ready(function filterFun1() {
         data.forEach(element => {
             // console.log(element.keyword);
             $('select').append("<option></option>");
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i];
+
+            }
             filterOption = $('option').last().text(element.keyword).attr('value', element.keyword);
             //it take always the first option , so use last to get the last one i added 
             $(document).ready(function() {
@@ -116,23 +119,11 @@ $(document).ready(function filterFun2() {
 
     // getImagesData();
 });
-// $(document).ready(getImagesData2);
-// -----------finsh make options--------------
-//we need get select option
-// for lab 03 Feature 1: Pagination
-//1. add tow click button , each one show  images form jason file not from two json file
-//------------- get data from json 2 -----
-// ------------------fisrt step-------------
-//we need function to get data from json file
 
-//---------------- finish ------------ 
-// create 2 buttons and append it to the header 
+/**** add all key for filter  */
 $('header').append('<button></button ><button></button >');
-// give it attr and id and text 
 let button1 = $('button').first().attr('type', 'button').attr('id', 'firstButton').text('first Page');
 let button2 = $('button').last().attr('type', 'button').attr('id', 'secondButton').text('second Page');
-//add event on click to show elements note : 20elements from 1page and 20elements from 2page
-// $(document).ready(filterFun1);
 $(document).ready(function() {
     $('#firstButton').on('click', function(event) {
         // $(document).ready(getImagesData2);
@@ -152,3 +143,4 @@ $(document).ready(function() {
         $('option').slice(0, 21).hide();
     })
 });
+/*  get the new list for filter */
