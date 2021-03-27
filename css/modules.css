@@ -1,0 +1,33 @@
+main div {
+    /* flex-direction: row; */
+    background-color: rgb(75, 49, 49);
+    border-radius: 7px;
+    color: snow;
+    border: 2px solid #000000;
+    margin-top: 5%;
+    /* font-size: 25px; */
+    height: 520px;
+    width: 400px;
+    display: inline-block;
+    /* margin: 3%; */
+    /* opacity: 0.5; */
+    text-align: center;
+    /* margin-bottom: 10%; */
+}
+
+main div img {
+    height: 300px;
+    width: 395px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 50px;
+}
+
+.template:first-child {
+    display: none;
+}
