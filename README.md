@@ -19,3 +19,26 @@ Start time:4:30
 Finish time: 7:26
 
 Actual time needed to complete: 3hours 
+
+
+# lab03_301
+
+Number and name of feature: 1#Pagination
+
+Estimate of time needed to complete: 2hour 
+
+Start time: 8:00pm
+
+Finish time: 12:45pm
+
+Actual time needed to complete: 4:45
+
+Number and name of feature: 1#Pagination
+
+Feature 2: Templating
+Estimate of time needed to complete: 2hour 
+Start time: 9:20am
+Finish time: ----
+Actual time needed to complete: 
+
+
