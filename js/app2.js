@@ -71,6 +71,10 @@ $(document).ready(function filterFun1() {
         data.forEach(element => {
             // console.log(element.keyword);
             $('select').append("<option></option>");
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i];
+
+            }
             filterOption = $('option').last().text(element.keyword).attr('value', element.keyword);
             //it take always the first option , so use last to get the last one i added 
             $(document).ready(function() {
@@ -139,3 +143,4 @@ $(document).ready(function() {
         $('option').slice(0, 21).hide();
     })
 });
+/*  get the new list for filter */
